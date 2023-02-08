@@ -1,0 +1,18 @@
+.cart-icon {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-length-bubble {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #f91944;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  font-size: 12px;
+  padding: 4px;
+}
