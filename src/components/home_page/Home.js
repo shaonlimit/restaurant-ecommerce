@@ -47,7 +47,7 @@ const Home = ({ cart }) => {
           <button
             className={`inline-block p-2 px-12 ${
               cart.length === 0
-                ? 'bg-gray-600 cursor-not-allowed'
+                ? 'bg-gray-600 opacity-50 cursor-not-allowed'
                 : ' bg-primary-color'
             } rounded w-full text-white font-medium`}
           >

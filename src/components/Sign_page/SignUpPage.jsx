@@ -5,12 +5,14 @@ import { FormInputData } from '../../JSON_data/FormInputData';
 
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../firebaseConfig/firebase';
+import PopUp from '../pop_up/PopUp';
 
 const SignUpPage = () => {
   const [inputValues, setInputValues] = useState({});
   const navigate = useNavigate();
   const [passwordMessage, setPasswordMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState();
+  const [popUp, setPopUp] = useState(false);
 
   const signUpUser = (e) => {
     e.preventDefault();
@@ -27,7 +29,12 @@ const SignUpPage = () => {
         const user = userCredential.user;
 
         saveProfile(inputValues.name);
-        navigate('/sign-in');
+        setPopUp(true);
+        setTimeout(() => {
+          setPopUp(false);
+          navigate('/sign-in');
+        }, 3000);
+
         console.log(user);
       })
       .catch((error) => {
@@ -101,6 +108,7 @@ const SignUpPage = () => {
           </p>
         </Link>
       </div>
+      {popUp && <PopUp text='Account created successfully' />}
     </div>
   );
 };

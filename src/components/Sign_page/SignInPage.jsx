@@ -5,12 +5,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../images/logo2.png';
 import { FormInputData } from '../../JSON_data/FormInputData';
 import { auth } from '../firebaseConfig/firebase';
+import PopUp from '../pop_up/PopUp';
 
 const SignInPage = () => {
   const navigatge = useNavigate();
   const formInputData = FormInputData.slice(1, 3);
   const [inputValues, setInputValues] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
+  const [popUp, setPopUp] = useState(false);
   const handleChange = (e) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
   };
@@ -20,8 +22,13 @@ const SignInPage = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        setPopUp(true);
+        setTimeout(() => {
+          setPopUp(false);
+          navigatge('/shipping');
+        }, 3000);
         console.log(user);
-        navigatge('/shipping');
+
         // ...
       })
       .catch((error) => {
@@ -77,6 +84,7 @@ const SignInPage = () => {
           </p>
         </Link>
       </div>
+      {popUp && <PopUp text='Sign in successful' />}
     </div>
   );
 };
