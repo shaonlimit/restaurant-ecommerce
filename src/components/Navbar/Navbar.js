@@ -1,14 +1,32 @@
+import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../images/logo2.png';
+import { auth } from '../firebaseConfig/firebase';
 import CartIcon from './CartIcon';
 
 const Navbar = ({ cart }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const navigate = useNavigate();
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const user = auth.currentUser;
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        navigate('/');
+        console.log('Signed out successfully');
+      })
+      .catch((error) => {
+        // An error happened.
+      });
   };
 
   return (
@@ -47,20 +65,33 @@ const Navbar = ({ cart }) => {
             </li>
             <li className='sign-in-button mr-3'>
               {/* sign in button */}
-              <Link to='/sign-in'>
-                {' '}
-                <button className='inline-block py-1 px-5 text-black font-medium'>
-                  Sign In
-                </button>
-              </Link>
+              {user !== null ? (
+                <p>{user.displayName}</p>
+              ) : (
+                <Link to='/sign-in'>
+                  {' '}
+                  <button className='inline-block py-1 px-5 text-black font-medium'>
+                    Sign In
+                  </button>
+                </Link>
+              )}
             </li>
             <li className='sign-up-button mr-3'>
               {/* sign up button */}
-              <Link to='/sign-up'>
-                <button className='inline-block p-1 px-5 bg-primary-color rounded-full text-white font-medium'>
-                  Sign Up
+              {user !== null ? (
+                <button
+                  onClick={handleLogout}
+                  className='inline-block p-1 px-5 bg-primary-color rounded-full text-white font-medium'
+                >
+                  Sign Out
                 </button>
-              </Link>
+              ) : (
+                <Link to='/sign-up'>
+                  <button className='inline-block p-1 px-5 bg-primary-color rounded-full text-white font-medium'>
+                    Sign Up
+                  </button>
+                </Link>
+              )}
             </li>
           </ul>
         </div>
