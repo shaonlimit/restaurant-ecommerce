@@ -3,13 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../images/logo2.png';
 import { FormInputData } from '../../JSON_data/FormInputData';
 
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../firebaseConfig/firebase';
 
 const SignUpPage = () => {
   const [inputValues, setInputValues] = useState({});
   const navigate = useNavigate();
   const [passwordMessage, setPasswordMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState();
 
   const signUpUser = (e) => {
     e.preventDefault();
@@ -24,18 +25,29 @@ const SignUpPage = () => {
     )
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
 
+        saveProfile(inputValues.name);
         navigate('/sign-in');
+        console.log(user);
       })
       .catch((error) => {
-        console.log(error);
+        setErrorMessage(error.message);
       });
   };
   const formInputData = FormInputData.slice(0, 4);
   const handleChange = (e) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
   };
+  const saveProfile = (name) => {
+    updateProfile(auth.currentUser, {
+      displayName: name,
+    })
+      .then(() => {
+        console.log('save profile successfully');
+      })
+      .catch((error) => {});
+  };
+
   return (
     <div className='h-screen flex justify-center items-center'>
       <div className='sign-up bg-white rounded shadow  p-8 w-fit'>
@@ -70,6 +82,11 @@ const SignUpPage = () => {
               Sign Up
             </button>
           </div>
+          {errorMessage && (
+            <p className='text-sm text-red-700 text-center mt-3'>
+              {errorMessage}
+            </p>
+          )}
         </form>
 
         <Link to='/sign-in'>
