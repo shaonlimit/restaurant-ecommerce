@@ -26,7 +26,13 @@ const SignInPage = () => {
       })
       .catch((error) => {
         const errorMessage = error.message;
-        setErrorMessage(errorMessage);
+        if (errorMessage.includes('wrong')) {
+          setErrorMessage('Wrong password');
+        } else if (errorMessage.includes('found')) {
+          setErrorMessage('User not found');
+        } else {
+          setErrorMessage(errorMessage);
+        }
       });
   };
   return (

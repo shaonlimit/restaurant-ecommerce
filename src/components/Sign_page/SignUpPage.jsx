@@ -31,7 +31,13 @@ const SignUpPage = () => {
         console.log(user);
       })
       .catch((error) => {
-        setErrorMessage(error.message);
+        if (error.message.includes('characters')) {
+          setErrorMessage('Password should be at least 6 charecters');
+        } else if (error.message.includes('email')) {
+          setErrorMessage('Email already in use');
+        } else {
+          setErrorMessage(error.message);
+        }
       });
   };
   const formInputData = FormInputData.slice(0, 4);
