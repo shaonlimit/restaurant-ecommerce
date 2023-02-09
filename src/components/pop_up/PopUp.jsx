@@ -6,7 +6,7 @@ const PopUp = ({ text }) => {
     <>
       <div className='pop-up'>
         <div className='bg-white flex flex-col justify-center items-center p-8 rounded'>
-          <i class='bx bxs-check-square text-primary-color text-4xl mb-4'></i>
+          <i class='bx bxs-check-square text-primary-color text-4xl mb-4 rounded-full'></i>
           <h2 className='text-xl text-center font-medium text-primary-color'>
             {text}
           </h2>

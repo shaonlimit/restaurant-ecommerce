@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { MenuItem } from '../../JSON_data/MenuItem';
 import { addToCart } from '../redux/actions/cartAction';
 import PopUp from '../pop_up/PopUp';
 
 const SingleProductView = ({ addToCart, cart }) => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [popUp, setPopUp] = useState(false);
   const product = MenuItem.find((item) => item.id === id);
@@ -18,6 +19,10 @@ const SingleProductView = ({ addToCart, cart }) => {
       addToCart({ ...product, quantity: quantity });
     }
     setPopUp(true);
+    setTimeout(() => {
+      setPopUp(false);
+      navigate('/');
+    }, 3000);
   };
 
   return (
@@ -51,18 +56,10 @@ const SingleProductView = ({ addToCart, cart }) => {
             >
               Add to Cart
             </button>
-
-            <Link to='/'>
-              <button className='inline-block p-1 px-5 bg-primary-color rounded-full text-white font-medium'>
-                Choose Food
-              </button>
-            </Link>
           </div>
         </div>
       </div>
-      {popUp && (
-        <PopUp text='Food added to cart' setPopUp={() => setPopUp(false)} />
-      )}
+      {popUp && <PopUp text='Food added to cart' />}
     </>
   );
 };
