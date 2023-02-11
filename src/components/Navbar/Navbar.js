@@ -1,9 +1,9 @@
-import { signOut } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../images/logo2.png';
-import { auth } from '../firebaseConfig/firebase';
+
 import CartIcon from './CartIcon';
 
 const Navbar = ({ cart }) => {
@@ -14,7 +14,7 @@ const Navbar = ({ cart }) => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
+  const auth = getAuth();
   const user = auth.currentUser;
 
   const handleLogout = () => {

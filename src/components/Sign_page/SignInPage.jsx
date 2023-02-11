@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import logo from '../../images/logo2.png';
 import { FormInputData } from '../../JSON_data/FormInputData';
@@ -8,7 +8,8 @@ import { auth } from '../firebaseConfig/firebase';
 import PopUp from '../pop_up/PopUp';
 
 const SignInPage = () => {
-  const navigatge = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
   const formInputData = FormInputData.slice(1, 3);
   const [inputValues, setInputValues] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
@@ -25,8 +26,9 @@ const SignInPage = () => {
         setPopUp(true);
         setTimeout(() => {
           setPopUp(false);
-          navigatge('/shipping');
-        }, 3000);
+          navigate(location.state.from);
+        }, 1000);
+
         console.log(user);
 
         // ...

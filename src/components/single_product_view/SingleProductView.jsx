@@ -22,7 +22,7 @@ const SingleProductView = ({ addToCart, cart }) => {
     setTimeout(() => {
       setPopUp(false);
       navigate('/');
-    }, 3000);
+    }, 1000);
   };
 
   return (

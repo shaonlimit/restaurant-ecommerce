@@ -8,8 +8,10 @@ import { auth } from '../firebaseConfig/firebase';
 import PopUp from '../pop_up/PopUp';
 
 const SignUpPage = () => {
-  const [inputValues, setInputValues] = useState({});
   const navigate = useNavigate();
+
+  const [inputValues, setInputValues] = useState({});
+
   const [passwordMessage, setPasswordMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState();
   const [popUp, setPopUp] = useState(false);
@@ -32,8 +34,8 @@ const SignUpPage = () => {
         setPopUp(true);
         setTimeout(() => {
           setPopUp(false);
-          navigate('/sign-in');
-        }, 3000);
+          navigate('/');
+        }, 1000);
 
         console.log(user);
       })
