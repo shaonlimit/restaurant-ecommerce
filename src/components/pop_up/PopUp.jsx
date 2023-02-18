@@ -10,6 +10,7 @@ const PopUp = ({ text }) => {
           <h2 className='text-xl text-center font-medium text-primary-color'>
             {text}
           </h2>
+          <h1>Shaon</h1>
         </div>
       </div>
     </>
