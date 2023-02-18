@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import logo from '../../images/logo2.png';
 import { FormInputData } from '../../JSON_data/FormInputData';
@@ -8,7 +8,6 @@ import { auth } from '../firebaseConfig/firebase';
 import PopUp from '../pop_up/PopUp';
 
 const SignInPage = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const formInputData = FormInputData.slice(1, 3);
   const [inputValues, setInputValues] = useState({});
@@ -26,7 +25,7 @@ const SignInPage = () => {
         setPopUp(true);
         setTimeout(() => {
           setPopUp(false);
-          navigate(location.state.from);
+          navigate('/');
         }, 1000);
 
         console.log(user);

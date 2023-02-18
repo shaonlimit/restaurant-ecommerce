@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../images/logo2.png';
+import PopUp from '../pop_up/PopUp';
 
 import CartIcon from './CartIcon';
 
 const Navbar = ({ cart }) => {
+  const [popUp, setPopUp] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -20,9 +22,11 @@ const Navbar = ({ cart }) => {
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
-        navigate('/');
-        console.log('Signed out successfully');
+        setPopUp(true);
+        setTimeout(() => {
+          setPopUp(false);
+          navigate('/');
+        }, 1000);
       })
       .catch((error) => {
         // An error happened.
@@ -96,6 +100,7 @@ const Navbar = ({ cart }) => {
           </ul>
         </div>
       </div>
+      {popUp && <PopUp text='Sign out successful' />}
     </nav>
   );
 };
