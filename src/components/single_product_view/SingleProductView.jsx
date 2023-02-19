@@ -39,13 +39,9 @@ const SingleProductView = ({ addToCart, cart }) => {
             <label htmlFor='quantity'>Quantity: </label>
             <input
               type='number'
-              value={quantity}
-              onChange={(e) => {
-                if (e.target.value === '0') {
-                  return;
-                }
-                setQuantity(Number(e.target.value));
-              }}
+              min={'1'}
+              value={quantity || ''}
+              onChange={(e) => setQuantity(Number(e.target.value))}
             />
           </div>
 
