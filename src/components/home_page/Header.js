@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import backgroundImage from '../../images/bannerbackground.png';
 
 const Header = () => {
@@ -13,6 +14,13 @@ const Header = () => {
       <h1 className=' text-slate-800 font-bold uppercase text-center lg:text-5xl md:text-4xl sm:text-3xl'>
         Best food waiting for your belly
       </h1>
+
+      <Link to='/shop'>
+        <button className='inline-block p-2 px-8  bg-primary-color rounded w-full text-white font-medium mt-8'>
+          ORDER FOOD
+        </button>
+      </Link>
+
       {/* <div className='w-2/5 md:relative'>
         <input
           type='text'

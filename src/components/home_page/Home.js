@@ -42,10 +42,10 @@ const Home = ({ cart }) => {
       {showLunch && <Lunch />}
 
       {showDinner && <Dinner />}
-      <div className='flex justify-center mt-12 w-1/5 mx-auto'>
+      <div className='flex justify-center mt-12 w-4/5 mx-auto'>
         <Link to='/shipping'>
           <button
-            className={`inline-block p-2 px-12 ${
+            className={`inline-block p-2 px-10 ${
               cart.length === 0
                 ? 'bg-gray-600 opacity-50 cursor-not-allowed'
                 : ' bg-primary-color'
